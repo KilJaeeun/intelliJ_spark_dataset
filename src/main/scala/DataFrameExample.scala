@@ -13,8 +13,6 @@ object DataFrameExample {
     val conf = new SparkConf()
       .setMaster("local")
       .set("spark.submit.deployMode", "client")
-
-
     val spark = SparkSession.builder.config(conf).getOrCreate()
     val movieSamples = spark.read.option("header", "true").csv("src/main/resources/sampledata/movies.csv")
     val ratingSamples = spark.read.option("header", "true").csv("src/main/resources/sampledata/ratings.csv")
@@ -28,7 +26,7 @@ object DataFrameExample {
 
     val sortedOutput = ratingMovieGroupByMovie.sort(col("avg_rating").desc)
 
-    spark.time(sortedOutput.show(4,false))
-// Time taken: 3009 ms
+    spark.time(sortedOutput.show(4, false))
+    // Time taken: 3009 ms
   }
 }
